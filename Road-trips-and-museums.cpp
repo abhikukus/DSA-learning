@@ -95,13 +95,7 @@ int main() {
     g.museum.push_back(t);
   }
 
-  //cout << g.museum.size() <<endl;
-  for (int i = 0; i < g.museum.size(); ++i)
-  {
-    //cout << g.museum[i] << " ";
-  }
-
-
+ 
   vector<int> ansArr;
 
   for (int i = 1; i <= N; ++i)

@@ -1,0 +1,316 @@
+--------------
+create table Employee (
+    Employee_id integer primary key,
+    First_name text,
+    Last_name text,
+    Salary integer,
+    Joining_date DATE,
+    Department text
+)
+--------------
+
+Query OK, 0 rows affected (0.001 sec)
+
+--------------
+insert into Employee (Employee_id, First_name, Last_name, Salary, Joining_date, Department) 
+values
+    (1,'Bala','Krishna',1893028,'2019-01-20','Finance'),
+    (2,'Jasvi','Kanth',58932832,'2019-01-15','IT'),
+    (3,'Pradeep','Jay',5893923,'2019-02-05','Banking'),
+    (4,'Joseph','Alias',5984092,'2019-02-25','Insurance'),
+    (5,'Marry','Matha',9288012,'2019-02-28','Finance'),
+    (6,'Ajax','cipla',38920211,'2019-05-10','IT'),
+    (7,'Yoshi','Sanu',1984722,'2019-06-20','Banking')
+--------------
+
+Query OK, 7 rows affected (0.000 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+--------------
+select * from Employee
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           1 | Bala       | Krishna   |  1893028 | 2019-01-20   | Finance    |
+|           2 | Jasvi      | Kanth     | 58932832 | 2019-01-15   | IT         |
+|           3 | Pradeep    | Jay       |  5893923 | 2019-02-05   | Banking    |
+|           4 | Joseph     | Alias     |  5984092 | 2019-02-25   | Insurance  |
+|           5 | Marry      | Matha     |  9288012 | 2019-02-28   | Finance    |
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
+|           7 | Yoshi      | Sanu      |  1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+----------+--------------+------------+
+7 rows in set (0.000 sec)
+
+--------------
+select First_name, Last_name from Employee
+--------------
+
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| Bala       | Krishna   |
+| Jasvi      | Kanth     |
+| Pradeep    | Jay       |
+| Joseph     | Alias     |
+| Marry      | Matha     |
+| Ajax       | cipla     |
+| Yoshi      | Sanu      |
++------------+-----------+
+7 rows in set (0.000 sec)
+
+--------------
+select First_name as 'Employee Name' from Employee
+--------------
+
++---------------+
+| Employee Name |
++---------------+
+| Bala          |
+| Jasvi         |
+| Pradeep       |
+| Joseph        |
+| Marry         |
+| Ajax          |
+| Yoshi         |
++---------------+
+7 rows in set (0.000 sec)
+
+--------------
+select lcase(Last_name) from Employee
+--------------
+
++------------------+
+| lcase(Last_name) |
++------------------+
+| krishna          |
+| kanth            |
+| jay              |
+| alias            |
+| matha            |
+| cipla            |
+| sanu             |
++------------------+
+7 rows in set (0.000 sec)
+
+--------------
+select ucase(Last_name) from Employee
+--------------
+
++------------------+
+| ucase(Last_name) |
++------------------+
+| KRISHNA          |
+| KANTH            |
+| JAY              |
+| ALIAS            |
+| MATHA            |
+| CIPLA            |
+| SANU             |
++------------------+
+7 rows in set (0.000 sec)
+
+--------------
+select Distinct Department from Employee
+--------------
+
++------------+
+| Department |
++------------+
+| Finance    |
+| IT         |
+| Banking    |
+| Insurance  |
++------------+
+4 rows in set (0.001 sec)
+
+--------------
+select substring(First_name,1,4) from Employee
+--------------
+
++---------------------------+
+| substring(First_name,1,4) |
++---------------------------+
+| Bala                      |
+| Jasv                      |
+| Prad                      |
+| Jose                      |
+| Marr                      |
+| Ajax                      |
+| Yosh                      |
++---------------------------+
+7 rows in set (0.000 sec)
+
+--------------
+select position("h" in (select First_name from Employee where First_name='Joseph')) from dual
+--------------
+
++------------------------------------------------------------------------------+
+| position("h" in (select First_name from Employee where First_name='Joseph')) |
++------------------------------------------------------------------------------+
+|                                                                            6 |
++------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+--------------
+select TRIM(First_name) from Employee
+--------------
+
++------------------+
+| TRIM(First_name) |
++------------------+
+| Bala             |
+| Jasvi            |
+| Pradeep          |
+| Joseph           |
+| Marry            |
+| Ajax             |
+| Yoshi            |
++------------------+
+7 rows in set (0.000 sec)
+
+--------------
+select * from Employee where First_name like "B%"
+--------------
+
++-------------+------------+-----------+---------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Department |
++-------------+------------+-----------+---------+--------------+------------+
+|           1 | Bala       | Krishna   | 1893028 | 2019-01-20   | Finance    |
++-------------+------------+-----------+---------+--------------+------------+
+1 row in set (0.000 sec)
+
+--------------
+select * from Employee where instr(First_name, "Y")>0
+--------------
+
++-------------+------------+-----------+---------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Department |
++-------------+------------+-----------+---------+--------------+------------+
+|           5 | Marry      | Matha     | 9288012 | 2019-02-28   | Finance    |
+|           7 | Yoshi      | Sanu      | 1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+---------+--------------+------------+
+2 rows in set (0.000 sec)
+
+--------------
+select * from Employee where locate("Y", First_name)>0
+--------------
+
++-------------+------------+-----------+---------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Department |
++-------------+------------+-----------+---------+--------------+------------+
+|           5 | Marry      | Matha     | 9288012 | 2019-02-28   | Finance    |
+|           7 | Yoshi      | Sanu      | 1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+---------+--------------+------------+
+2 rows in set (0.000 sec)
+
+--------------
+select * from Employee where First_name like "%i"
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           2 | Jasvi      | Kanth     | 58932832 | 2019-01-15   | IT         |
+|           7 | Yoshi      | Sanu      |  1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+----------+--------------+------------+
+2 rows in set (0.000 sec)
+
+--------------
+select * from Employee where First_name like "___x"
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
++-------------+------------+-----------+----------+--------------+------------+
+1 row in set (0.000 sec)
+
+--------------
+select * from Employee where First_name like "j___"
+--------------
+
+Empty set (0.000 sec)
+
+--------------
+select * from Employee where Salary > 3000000
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           2 | Jasvi      | Kanth     | 58932832 | 2019-01-15   | IT         |
+|           3 | Pradeep    | Jay       |  5893923 | 2019-02-05   | Banking    |
+|           4 | Joseph     | Alias     |  5984092 | 2019-02-25   | Insurance  |
+|           5 | Marry      | Matha     |  9288012 | 2019-02-28   | Finance    |
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
++-------------+------------+-----------+----------+--------------+------------+
+5 rows in set (0.000 sec)
+
+--------------
+select * from Employee where Salary < 3000000
+--------------
+
++-------------+------------+-----------+---------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Department |
++-------------+------------+-----------+---------+--------------+------------+
+|           1 | Bala       | Krishna   | 1893028 | 2019-01-20   | Finance    |
+|           7 | Yoshi      | Sanu      | 1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+---------+--------------+------------+
+2 rows in set (0.000 sec)
+
+--------------
+select * from Employee where Salary between 2000000 and 5000000
+--------------
+
+Empty set (0.000 sec)
+
+--------------
+select * from Employee where First_name in ("Bala","Ajax")
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           1 | Bala       | Krishna   |  1893028 | 2019-01-20   | Finance    |
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
++-------------+------------+-----------+----------+--------------+------------+
+2 rows in set (0.000 sec)
+
+--------------
+select * from Employee where year(Joining_date) = 2019
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           1 | Bala       | Krishna   |  1893028 | 2019-01-20   | Finance    |
+|           2 | Jasvi      | Kanth     | 58932832 | 2019-01-15   | IT         |
+|           3 | Pradeep    | Jay       |  5893923 | 2019-02-05   | Banking    |
+|           4 | Joseph     | Alias     |  5984092 | 2019-02-25   | Insurance  |
+|           5 | Marry      | Matha     |  9288012 | 2019-02-28   | Finance    |
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
+|           7 | Yoshi      | Sanu      |  1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+----------+--------------+------------+
+7 rows in set (0.000 sec)
+
+--------------
+select * from Employee where Joining_date like "2019%"
+--------------
+
++-------------+------------+-----------+----------+--------------+------------+
+| Employee_id | First_name | Last_name | Salary   | Joining_date | Department |
++-------------+------------+-----------+----------+--------------+------------+
+|           1 | Bala       | Krishna   |  1893028 | 2019-01-20   | Finance    |
+|           2 | Jasvi      | Kanth     | 58932832 | 2019-01-15   | IT         |
+|           3 | Pradeep    | Jay       |  5893923 | 2019-02-05   | Banking    |
+|           4 | Joseph     | Alias     |  5984092 | 2019-02-25   | Insurance  |
+|           5 | Marry      | Matha     |  9288012 | 2019-02-28   | Finance    |
+|           6 | Ajax       | cipla     | 38920211 | 2019-05-10   | IT         |
+|           7 | Yoshi      | Sanu      |  1984722 | 2019-06-20   | Banking    |
++-------------+------------+-----------+----------+--------------+------------+
+7 rows in set (0.000 sec)
+
+Bye

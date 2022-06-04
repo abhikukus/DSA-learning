@@ -1,0 +1,81 @@
+# You are using MYSQL in Verbose Mode
+create table Employee (
+    Employee_id integer primary key,
+    First_name text,
+    Last_name text,
+    Salary integer,
+    Joining_date DATE,
+    Department text
+);
+
+insert into Employee (Employee_id, First_name, Last_name, Salary, Joining_date, Department) 
+values
+    (1,'Bala','Krishna',1893028,'2019-01-20','Finance'),
+    (2,'Jasvi','Kanth',58932832,'2019-01-15','IT'),
+    (3,'Pradeep','Jay',5893923,'2019-02-05','Banking'),
+    (4,'Joseph','Alias',5984092,'2019-02-25','Insurance'),
+    (5,'Marry','Matha',9288012,'2019-02-28','Finance'),
+    (6,'Ajax','cipla',38920211,'2019-05-10','IT'),
+    (7,'Yoshi','Sanu',1984722,'2019-06-20','Banking');
+
+#Q1: Get all Employees
+select * from Employee;
+
+#Q2: Get First_name and Last_name of all Employees
+select First_name, Last_name from Employee;
+
+#Q3: Get First_name with alias "Employee Name" all Employees
+select First_name as 'Employee Name' from Employee;
+
+#Q4: Get all "Last_Name" in lower case
+select lcase(Last_name) from Employee;
+
+#Q5: Get all "Last_Name" in uppercase case
+select ucase(Last_name) from Employee;
+
+#Q6: Get Unique Department
+select Distinct Department from Employee;
+
+#Q7: Get first 4 characters of "First_name" coloumn
+select substring(First_name,1,4) from Employee;
+
+#Q8: Get the position of letter h in 'joseph'
+select position("h" in (select First_name from Employee where First_name='Joseph')) from dual;
+
+#Q9: Get all values from First_name after removing white spaces from right
+select TRIM(First_name) from Employee;
+
+#Q10: Write the syntax to create "Employee" table
+# Create table TABLE_NAME ( Col1 type modifier, Col2 type modifier );
+
+#Q11: Get all the details about employees whose first name begins with 'B';
+select * from Employee where First_name like "B%";
+
+#Q12: Get all the details about employees whose first name contains 'Y';
+select * from Employee where instr(First_name, "Y")>0;
+select * from Employee where locate("Y", First_name)>0;
+
+#Q13: Get all the details about employees whose first name ends with 'i';
+select * from Employee where First_name like "%i";
+
+#Q14: Get all the details about employees whose first name ends with 'x' and contains 4 letters;
+select * from Employee where First_name like "___x";
+
+#Q15: Get all the details about employees whose first name begins with 'j' and contains 4 letters;
+select * from Employee where First_name like "j___";
+
+#Q16: Get details of all employees whose salary is over 3,000,000
+select * from Employee where Salary > 3000000;
+
+#Q17: Get details about employees whose salary is less than 3,000,000
+select * from Employee where Salary < 3000000;
+
+#Q18: Get details about employees with salary between 2,000,000 and 5,000,000
+select * from Employee where Salary between 2000000 and 5000000;
+
+#Q19: Get details about employees whose first name is 'Bala' or 'Ajax'.
+select * from Employee where First_name in ("Bala","Ajax"); 
+
+#Q20: Get all details of employees whose joining year is "2019".
+select * from Employee where year(Joining_date) = 2019;
+select * from Employee where Joining_date like "2019%";
